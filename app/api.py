@@ -498,19 +498,24 @@ async def global_exception_handler(request, exc):
 
 if __name__ == "__main__":
     import uvicorn
+    import os
+    
+    # Get port from environment variable (Render sets this)
+    port = int(os.getenv("PORT", 8000))
     
     print("="*70)
     print("🚀 Starting DebtSage API Server")
     print("="*70)
-    print("\n📊 API Endpoints:")
-    print("  • Documentation: http://localhost:8000/docs")
-    print("  • Alternative Docs: http://localhost:8000/redoc")
-    print("  • Health Check: http://localhost:8000/health")
+    print(f"\n📊 Port: {port}")
+    print(f"📊 API Endpoints:")
+    print(f"  • Documentation: http://0.0.0.0:{port}/docs")
+    print(f"  • Alternative Docs: http://0.0.0.0:{port}/redoc")
+    print(f"  • Health Check: http://0.0.0.0:{port}/health")
     print("\n💡 Example Request:")
-    print("""
-    curl -X POST http://localhost:8000/predict \\
+    print(f"""
+    curl -X POST http://0.0.0.0:{port}/predict \\
       -H "Content-Type: application/json" \\
-      -d '{
+      -d '{{
         "debt_to_gdp": 65.0,
         "deficit_to_gdp": -3.5,
         "revenue_to_gdp": 18.5,
@@ -522,8 +527,9 @@ if __name__ == "__main__":
         "primary_balance": -1.2,
         "exchange_rate_change": 2.1,
         "model": "xgboost"
-      }'
+      }}'
     """)
     print("="*70)
     
-    uvicorn.run(app, host="0.0.0.0", port=8000, reload=True)
+    # Disable reload in production (Render)
+    uvicorn.run(app, host="0.0.0.0", port=port, reload=False)
