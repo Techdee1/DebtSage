@@ -319,7 +319,10 @@ async def get_model_performance():
     Returns AUC-ROC, precision, recall, F1-score for each model.
     """
     try:
-        df = data_cache['model_performance']
+        df = data_cache['model_performance'].copy()
+        
+        # Standardize column names to lowercase
+        df.columns = df.columns.str.lower()
         
         # Group by model for cleaner output
         models_list = []
