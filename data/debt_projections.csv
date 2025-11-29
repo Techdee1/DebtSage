@@ -1,16 +1,211 @@
 year_ahead,scenario,debt_to_gdp,country
-1,baseline,50.21,Togo
-2,baseline,51.32,Togo
-3,baseline,52.46,Togo
-4,baseline,53.62,Togo
-5,baseline,54.81,Togo
-1,optimistic,49.23,Togo
-2,optimistic,49.33,Togo
-3,optimistic,49.44,Togo
-4,optimistic,49.54,Togo
-5,optimistic,49.65,Togo
-1,stress,51.2,Togo
-2,stress,53.35,Togo
-3,stress,55.6,Togo
-4,stress,57.94,Togo
-5,stress,60.38,Togo
+1,baseline,37.92,Nigeria
+2,baseline,38.87,Nigeria
+3,baseline,39.84,Nigeria
+4,baseline,40.84,Nigeria
+5,baseline,41.86,Nigeria
+1,optimistic,36.81,Nigeria
+2,optimistic,36.63,Nigeria
+3,optimistic,36.45,Nigeria
+4,optimistic,36.27,Nigeria
+5,optimistic,36.08,Nigeria
+1,stress,39.59,Nigeria
+2,stress,42.36,Nigeria
+3,stress,45.33,Nigeria
+4,stress,48.5,Nigeria
+5,stress,51.89,Nigeria
+1,baseline,72.77,South Africa
+2,baseline,74.59,South Africa
+3,baseline,76.46,South Africa
+4,baseline,78.37,South Africa
+5,baseline,80.33,South Africa
+1,optimistic,70.64,South Africa
+2,optimistic,70.29,South Africa
+3,optimistic,69.94,South Africa
+4,optimistic,69.59,South Africa
+5,optimistic,69.24,South Africa
+1,stress,75.97,South Africa
+2,stress,81.29,South Africa
+3,stress,86.98,South Africa
+4,stress,93.07,South Africa
+5,stress,99.58,South Africa
+1,baseline,90.2,Egypt
+2,baseline,92.45,Egypt
+3,baseline,94.77,Egypt
+4,baseline,97.14,Egypt
+5,baseline,99.56,Egypt
+1,optimistic,87.56,Egypt
+2,optimistic,87.12,Egypt
+3,optimistic,86.69,Egypt
+4,optimistic,86.25,Egypt
+5,optimistic,85.82,Egypt
+1,stress,94.16,Egypt
+2,stress,100.75,Egypt
+3,stress,107.8,Egypt
+4,stress,115.35,Egypt
+5,stress,123.42,Egypt
+1,baseline,69.7,Kenya
+2,baseline,71.44,Kenya
+3,baseline,73.23,Kenya
+4,baseline,75.06,Kenya
+5,baseline,76.94,Kenya
+1,optimistic,67.66,Kenya
+2,optimistic,67.32,Kenya
+3,optimistic,66.99,Kenya
+4,optimistic,66.65,Kenya
+5,optimistic,66.32,Kenya
+1,stress,72.76,Kenya
+2,stress,77.85,Kenya
+3,stress,83.3,Kenya
+4,stress,89.13,Kenya
+5,stress,95.37,Kenya
+1,baseline,79.95,Ghana
+2,baseline,81.95,Ghana
+3,baseline,84.0,Ghana
+4,baseline,86.1,Ghana
+5,baseline,88.25,Ghana
+1,optimistic,77.61,Ghana
+2,optimistic,77.22,Ghana
+3,optimistic,76.84,Ghana
+4,optimistic,76.45,Ghana
+5,optimistic,76.07,Ghana
+1,stress,83.46,Ghana
+2,stress,89.3,Ghana
+3,stress,95.55,Ghana
+4,stress,102.24,Ghana
+5,stress,109.4,Ghana
+1,baseline,55.35,Ethiopia
+2,baseline,56.73,Ethiopia
+3,baseline,58.15,Ethiopia
+4,baseline,59.61,Ethiopia
+5,baseline,61.1,Ethiopia
+1,optimistic,53.73,Ethiopia
+2,optimistic,53.46,Ethiopia
+3,optimistic,53.19,Ethiopia
+4,optimistic,52.93,Ethiopia
+5,optimistic,52.66,Ethiopia
+1,stress,57.78,Ethiopia
+2,stress,61.82,Ethiopia
+3,stress,66.15,Ethiopia
+4,stress,70.78,Ethiopia
+5,stress,75.74,Ethiopia
+1,baseline,65.6,Angola
+2,baseline,67.24,Angola
+3,baseline,68.92,Angola
+4,baseline,70.64,Angola
+5,baseline,72.41,Angola
+1,optimistic,63.68,Angola
+2,optimistic,63.36,Angola
+3,optimistic,63.04,Angola
+4,optimistic,62.73,Angola
+5,optimistic,62.42,Angola
+1,stress,68.48,Angola
+2,stress,73.27,Angola
+3,stress,78.4,Angola
+4,stress,83.89,Angola
+5,stress,89.76,Angola
+1,baseline,38.95,Tanzania
+2,baseline,39.92,Tanzania
+3,baseline,40.92,Tanzania
+4,baseline,41.94,Tanzania
+5,baseline,42.99,Tanzania
+1,optimistic,37.81,Tanzania
+2,optimistic,37.62,Tanzania
+3,optimistic,37.43,Tanzania
+4,optimistic,37.25,Tanzania
+5,optimistic,37.06,Tanzania
+1,stress,40.66,Tanzania
+2,stress,43.51,Tanzania
+3,stress,46.55,Tanzania
+4,stress,49.81,Tanzania
+5,stress,53.3,Tanzania
+1,baseline,56.37,Algeria
+2,baseline,57.78,Algeria
+3,baseline,59.23,Algeria
+4,baseline,60.71,Algeria
+5,baseline,62.23,Algeria
+1,optimistic,54.73,Algeria
+2,optimistic,54.45,Algeria
+3,optimistic,54.18,Algeria
+4,optimistic,53.91,Algeria
+5,optimistic,53.64,Algeria
+1,stress,58.85,Algeria
+2,stress,62.97,Algeria
+3,stress,67.38,Algeria
+4,stress,72.09,Algeria
+5,stress,77.14,Algeria
+1,baseline,74.82,Senegal
+2,baseline,76.7,Senegal
+3,baseline,78.61,Senegal
+4,baseline,80.58,Senegal
+5,baseline,82.59,Senegal
+1,optimistic,72.64,Senegal
+2,optimistic,72.27,Senegal
+3,optimistic,71.91,Senegal
+4,optimistic,71.55,Senegal
+5,optimistic,71.19,Senegal
+1,stress,78.11,Senegal
+2,stress,83.58,Senegal
+3,stress,89.43,Senegal
+4,stress,95.69,Senegal
+5,stress,102.39,Senegal
+1,baseline,73.8,Rwanda
+2,baseline,75.64,Rwanda
+3,baseline,77.54,Rwanda
+4,baseline,79.47,Rwanda
+5,baseline,81.46,Rwanda
+1,optimistic,71.64,Rwanda
+2,optimistic,71.28,Rwanda
+3,optimistic,70.93,Rwanda
+4,optimistic,70.57,Rwanda
+5,optimistic,70.22,Rwanda
+1,stress,77.04,Rwanda
+2,stress,82.43,Rwanda
+3,stress,88.2,Rwanda
+4,stress,94.38,Rwanda
+5,stress,100.98,Rwanda
+1,baseline,25.62,Botswana
+2,baseline,26.27,Botswana
+3,baseline,26.92,Botswana
+4,baseline,27.6,Botswana
+5,baseline,28.29,Botswana
+1,optimistic,24.88,Botswana
+2,optimistic,24.75,Botswana
+3,optimistic,24.63,Botswana
+4,optimistic,24.5,Botswana
+5,optimistic,24.38,Botswana
+1,stress,26.75,Botswana
+2,stress,28.62,Botswana
+3,stress,30.63,Botswana
+4,stress,32.77,Botswana
+5,stress,35.06,Botswana
+1,baseline,49.2,Ivory Coast
+2,baseline,50.43,Ivory Coast
+3,baseline,51.69,Ivory Coast
+4,baseline,52.98,Ivory Coast
+5,baseline,54.31,Ivory Coast
+1,optimistic,47.76,Ivory Coast
+2,optimistic,47.52,Ivory Coast
+3,optimistic,47.28,Ivory Coast
+4,optimistic,47.05,Ivory Coast
+5,optimistic,46.81,Ivory Coast
+1,stress,51.36,Ivory Coast
+2,stress,54.96,Ivory Coast
+3,stress,58.8,Ivory Coast
+4,stress,62.92,Ivory Coast
+5,stress,67.32,Ivory Coast
+1,baseline,69.7,Togo
+2,baseline,71.44,Togo
+3,baseline,73.23,Togo
+4,baseline,75.06,Togo
+5,baseline,76.94,Togo
+1,optimistic,67.66,Togo
+2,optimistic,67.32,Togo
+3,optimistic,66.99,Togo
+4,optimistic,66.65,Togo
+5,optimistic,66.32,Togo
+1,stress,72.76,Togo
+2,stress,77.85,Togo
+3,stress,83.3,Togo
+4,stress,89.13,Togo
+5,stress,95.37,Togo

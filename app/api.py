@@ -445,7 +445,12 @@ async def get_debt_projections(country: str):
         country_projections = df[df['country'].str.lower() == country.lower()]
         
         if country_projections.empty:
-            raise HTTPException(status_code=404, detail=f"No projections found for '{country}'")
+            # Get available countries for helpful error message
+            available = sorted(df['country'].unique().tolist())
+            raise HTTPException(
+                status_code=404, 
+                detail=f"No projections found for '{country}'. Available countries: {', '.join(available)}"
+            )
         
         # Organize by scenario
         scenarios = {}
@@ -454,10 +459,13 @@ async def get_debt_projections(country: str):
             scenario_data = scenario_data.replace({np.nan: None})
             scenarios[scenario] = scenario_data.to_dict('records')
         
+        # Handle both 'year' and 'year_ahead' column names
+        year_col = 'year_ahead' if 'year_ahead' in country_projections.columns else 'year'
+        
         return {
             "country": country,
             "scenarios": scenarios,
-            "years": sorted(country_projections['year'].unique().tolist())
+            "years_ahead": sorted(country_projections[year_col].unique().tolist())
         }
         
     except HTTPException:
