@@ -4,9 +4,9 @@
 
 The DebtSage API provides REST endpoints for AI-powered debt crisis prediction. Your software engineer can integrate these endpoints into any frontend application.
 
-**Base URL:** `http://localhost:8000` (development)  
+**Base URL:** `https://debtsage-api.onrender.com` (production)  
 **API Version:** 1.0.0  
-**Documentation:** http://localhost:8000/docs (Interactive Swagger UI)
+**Documentation:** https://debtsage-api.onrender.com/docs (Interactive Swagger UI)
 
 ---
 
@@ -36,9 +36,9 @@ uvicorn app.api:app --reload --host 0.0.0.0 --port 8000
 
 ### 3. Access Documentation
 
-- **Interactive Docs:** http://localhost:8000/docs (Swagger UI)
-- **Alternative Docs:** http://localhost:8000/redoc (ReDoc)
-- **Health Check:** http://localhost:8000/health
+- **Interactive Docs:** https://debtsage-api.onrender.com/docs (Swagger UI)
+- **Alternative Docs:** https://debtsage-api.onrender.com/redoc (ReDoc)
+- **Health Check:** https://debtsage-api.onrender.com/health
 
 ---
 
@@ -102,7 +102,7 @@ uvicorn app.api:app --reload --host 0.0.0.0 --port 8000
 
 **cURL Example:**
 ```bash
-curl -X POST http://localhost:8000/predict \
+curl -X POST https://debtsage-api.onrender.com/predict \
   -H "Content-Type: application/json" \
   -d '{
     "debt_to_gdp": 65.0,
@@ -121,7 +121,7 @@ curl -X POST http://localhost:8000/predict \
 
 **JavaScript Example:**
 ```javascript
-const response = await fetch('http://localhost:8000/predict', {
+const response = await fetch('https://debtsage-api.onrender.com/predict', {
   method: 'POST',
   headers: {
     'Content-Type': 'application/json',
@@ -150,7 +150,7 @@ console.log(data);
 ```python
 import requests
 
-url = "http://localhost:8000/predict"
+url = "https://debtsage-api.onrender.com/predict"
 payload = {
     "debt_to_gdp": 65.0,
     "deficit_to_gdp": -3.5,
@@ -261,7 +261,7 @@ print(response.json())
 - `start_year` (optional): Filter from this year
 - `end_year` (optional): Filter to this year
 
-**Example:** `GET /country/Togo?start_year=2015&end_year=2023`
+**Example:** `GET https://debtsage-api.onrender.com/country/Togo?start_year=2015&end_year=2023`
 
 **Response:**
 ```json
@@ -296,7 +296,7 @@ print(response.json())
 - `country` (optional): Filter by country name
 - `min_risk` (optional): Minimum risk score (0-100)
 
-**Example:** `GET /risk-scores?min_risk=50`
+**Example:** `GET https://debtsage-api.onrender.com/risk-scores?min_risk=50`
 
 **Response:**
 ```json
@@ -359,7 +359,7 @@ print(response.json())
 **Query Parameters:**
 - `top_n` (optional): Return only top N features
 
-**Example:** `GET /model/feature-importance?top_n=5`
+**Example:** `GET https://debtsage-api.onrender.com/model/feature-importance?top_n=5`
 
 **Response:**
 ```json
@@ -388,7 +388,7 @@ print(response.json())
 **Query Parameters:**
 - `country` (optional): Filter by country
 
-**Example:** `GET /fiscal/metrics?country=Togo`
+**Example:** `GET https://debtsage-api.onrender.com/fiscal/metrics?country=Togo`
 
 **Response:**
 ```json
@@ -438,7 +438,7 @@ print(response.json())
 
 **Endpoint:** `GET /projections/{country}`
 
-**Example:** `GET /projections/Togo`
+**Example:** `GET https://debtsage-api.onrender.com/projections/Togo`
 
 **Response:**
 ```json
@@ -500,7 +500,7 @@ print(response.json())
 
 ```javascript
 // lib/debtsageApi.js
-const API_BASE_URL = 'http://localhost:8000';
+const API_BASE_URL = 'https://debtsage-api.onrender.com';
 
 export async function predictRisk(indicators) {
   const response = await fetch(`${API_BASE_URL}/predict`, {
@@ -571,7 +571,7 @@ function PredictionForm() {
 // services/debtsageApi.js
 import axios from 'axios';
 
-const API_BASE_URL = 'http://localhost:8000';
+const API_BASE_URL = 'https://debtsage-api.onrender.com';
 
 export default {
   async predictRisk(indicators) {
@@ -643,7 +643,7 @@ interface PredictionResponse {
   providedIn: 'root'
 })
 export class DebtsageApiService {
-  private apiUrl = 'http://localhost:8000';
+  private apiUrl = 'https://debtsage-api.onrender.com';
 
   constructor(private http: HttpClient) {}
 
@@ -708,7 +708,7 @@ All endpoints return standard HTTP status codes:
 **Example Error Handling:**
 ```javascript
 try {
-  const response = await fetch('http://localhost:8000/predict', {
+  const response = await fetch('https://debtsage-api.onrender.com/predict', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(indicators)
@@ -762,18 +762,18 @@ app.add_middleware(
 
 ```bash
 # Health check
-curl http://localhost:8000/health
+curl https://debtsage-api.onrender.com/health
 
 # Get countries
-curl http://localhost:8000/countries
+curl https://debtsage-api.onrender.com/countries
 
 # Make prediction
-curl -X POST http://localhost:8000/predict \
+curl -X POST https://debtsage-api.onrender.com/predict \
   -H "Content-Type: application/json" \
   -d '{"debt_to_gdp": 65, "deficit_to_gdp": -3.5, ..., "model": "xgboost"}'
 
 # Get country data
-curl "http://localhost:8000/country/Togo?start_year=2020"
+curl "https://debtsage-api.onrender.com/country/Togo?start_year=2020"
 ```
 
 ### Using Python
@@ -782,13 +782,13 @@ curl "http://localhost:8000/country/Togo?start_year=2020"
 import requests
 
 # Get risk scores
-response = requests.get('http://localhost:8000/risk-scores')
+response = requests.get('https://debtsage-api.onrender.com/risk-scores')
 data = response.json()
 print(data)
 
 # Make prediction
 response = requests.post(
-    'http://localhost:8000/predict',
+    'https://debtsage-api.onrender.com/predict',
     json={
         'debt_to_gdp': 65.0,
         'deficit_to_gdp': -3.5,
@@ -808,8 +808,8 @@ print(response.json())
 
 ### Using Postman
 
-1. Import API collection: Use OpenAPI spec from http://localhost:8000/openapi.json
-2. Set base URL: http://localhost:8000
+1. Import API collection: Use OpenAPI spec from https://debtsage-api.onrender.com/openapi.json
+2. Set base URL: https://debtsage-api.onrender.com
 3. Test endpoints with sample requests
 
 ---
@@ -862,8 +862,9 @@ gunicorn app.api:app -w 4 -k uvicorn.workers.UvicornWorker --bind 0.0.0.0:8000
 
 ## Support & Contact
 
-- **Documentation:** http://localhost:8000/docs
+- **Documentation:** https://debtsage-api.onrender.com/docs
 - **GitHub:** github.com/Techdee1/10Analytics
+- **Production API:** https://debtsage-api.onrender.com
 - **Issues:** Create issue on GitHub repository
 
 ---
