@@ -68,11 +68,8 @@ def load_data():
     feature_imp = pd.read_csv(data_path / "feature_importance.csv")
     scorecard = pd.read_csv(data_path / "fiscal_health_scorecard.csv")
     
-    # Filter to valid debt data
-    fiscal = fiscal[
-        (fiscal['debt_to_gdp'] > 0) & 
-        (fiscal['debt_to_gdp'] < 200)
-    ]
+    # Note: Keep all countries, don't filter by debt_to_gdp
+    # Some countries have extreme values or missing data, but we want them visible
     
     return fiscal, risk_scores, model_perf, feature_imp, scorecard
 
