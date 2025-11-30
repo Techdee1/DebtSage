@@ -55,7 +55,12 @@ st.markdown("""
 @st.cache_data
 def load_data():
     """Load all required datasets"""
-    data_path = Path("../data")
+    # Handle both local (../data) and deployed (data/) paths
+    import os
+    if os.path.exists("../data"):
+        data_path = Path("../data")
+    else:
+        data_path = Path("data")
     
     fiscal = pd.read_csv(data_path / "fiscal_metrics_complete.csv")
     risk_scores = pd.read_csv(data_path / "country_risk_scores.csv")
@@ -74,8 +79,14 @@ def load_data():
 @st.cache_resource
 def load_model():
     """Load trained XGBoost model"""
-    model_path = Path("../models/xgboost_model.pkl")
-    scaler_path = Path("../models/feature_scaler.pkl")
+    # Handle both local (../models) and deployed (models/) paths
+    import os
+    if os.path.exists("../models"):
+        model_path = Path("../models/xgboost_model.pkl")
+        scaler_path = Path("../models/feature_scaler.pkl")
+    else:
+        model_path = Path("models/xgboost_model.pkl")
+        scaler_path = Path("models/feature_scaler.pkl")
     return joblib.load(model_path), joblib.load(scaler_path)
 
 # Load all data
@@ -449,7 +460,12 @@ elif page == "📈 Debt Projections":
     """)
     
     try:
-        projections = pd.read_csv("../data/debt_projections.csv")
+        # Handle both local and deployed paths
+        import os
+        if os.path.exists("../data/debt_projections.csv"):
+            projections = pd.read_csv("../data/debt_projections.csv")
+        else:
+            projections = pd.read_csv("data/debt_projections.csv")
         
         # Country selector
         proj_countries = sorted(projections['country'].unique())
