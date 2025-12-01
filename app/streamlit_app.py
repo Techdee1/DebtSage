@@ -173,7 +173,7 @@ if page == "🏠 Overview":
             barmode='group',
             height=400
         )
-        st.plotly_chart(fig, use_container_width=True)
+        st.plotly_chart(fig, width='stretch')
     
     with col2:
         top_features = feature_importance.head(10)
@@ -189,7 +189,7 @@ if page == "🏠 Overview":
             yaxis={'categoryorder': 'total ascending'},
             height=400
         )
-        st.plotly_chart(fig, use_container_width=True)
+        st.plotly_chart(fig, width='stretch')
     
     # Fiscal Health Overview
     st.markdown("---")
@@ -203,7 +203,7 @@ if page == "🏠 Overview":
     
     st.dataframe(
         display_scorecard[['fiscal_stress_score', 'debt_to_gdp', 'deficit_to_gdp', 'risk_score', 'Status']].round(1),
-        use_container_width=True
+        width='stretch'
     )
 
 # ===== PAGE 2: COUNTRY ANALYSIS =====
@@ -294,7 +294,7 @@ elif page == "🌍 Country Analysis":
         fig.update_yaxes(title_text="Deficit-to-GDP (%)", secondary_y=True)
         fig.update_layout(height=500, hovermode='x unified')
         
-        st.plotly_chart(fig, use_container_width=True)
+        st.plotly_chart(fig, width='stretch')
     
     with tab2:
         fig = go.Figure()
@@ -317,7 +317,7 @@ elif page == "🌍 Country Analysis":
             hovermode='x unified'
         )
         
-        st.plotly_chart(fig, use_container_width=True)
+        st.plotly_chart(fig, width='stretch')
     
     with tab3:
         if len(country_risk) > 0:
@@ -339,7 +339,7 @@ elif page == "🌍 Country Analysis":
                 height=500
             )
             
-            st.plotly_chart(fig, use_container_width=True)
+            st.plotly_chart(fig, width='stretch')
         else:
             st.info("Risk score data not available for this country")
 
@@ -445,7 +445,7 @@ elif page == "🤖 ML Risk Predictor":
                 xaxis_title="Contribution to Risk Score",
                 height=300
             )
-            st.plotly_chart(fig, use_container_width=True)
+            st.plotly_chart(fig, width='stretch')
 
 # ===== PAGE 4: DEBT PROJECTIONS =====
 elif page == "📈 Debt Projections":
@@ -508,7 +508,7 @@ elif page == "📈 Debt Projections":
             hovermode='x unified'
         )
         
-        st.plotly_chart(fig, use_container_width=True)
+        st.plotly_chart(fig, width='stretch')
         
         # 2030 outcomes
         st.subheader("2030 Projected Outcomes")
@@ -547,7 +547,7 @@ elif page == "📊 Cross-Country Comparison":
     st.dataframe(
         rankings[['Rank', 'country', 'fiscal_stress_score', 'debt_to_gdp', 
                   'deficit_to_gdp', 'risk_score', 'Status']].round(1),
-        use_container_width=True,
+        width='stretch',
         hide_index=True
     )
     
@@ -556,11 +556,12 @@ elif page == "📊 Cross-Country Comparison":
     st.subheader("Debt Sustainability Matrix")
     
     latest_year = fiscal_data['year'].max()
-    latest_data = fiscal_data[fiscal_data['year'] == latest_year].merge(
-        risk_data[risk_data['year'] == latest_year][['country', 'risk_score']],
-        on='country',
-        how='left'
-    )
+    # Get fiscal data for latest year
+    latest_fiscal = fiscal_data[fiscal_data['year'] == latest_year][['country', 'debt_to_gdp', 'deficit_to_gdp']].copy()
+    # Get risk scores for latest year
+    latest_risk = risk_data[risk_data['year'] == latest_year][['country', 'risk_score']].copy()
+    # Merge without duplicate columns
+    latest_data = latest_fiscal.merge(latest_risk, on='country', how='left')
     
     fig = px.scatter(
         latest_data,
@@ -584,7 +585,7 @@ elif page == "📊 Cross-Country Comparison":
     fig.add_hline(y=0, line_dash="solid", line_color="black")
     
     fig.update_traces(textposition='top center')
-    st.plotly_chart(fig, use_container_width=True)
+    st.plotly_chart(fig, width='stretch')
 
 # Footer
 st.markdown("---")
