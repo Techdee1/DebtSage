@@ -20,36 +20,109 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-# Custom CSS
-st.markdown("""
-<style>
-    .main-header {
-        font-size: 2.5rem;
-        font-weight: 700;
-        color: #1f77b4;
-        text-align: center;
-        margin-bottom: 1rem;
-    }
-    .metric-card {
-        background-color: #f0f2f6;
-        padding: 1rem;
-        border-radius: 0.5rem;
-        margin: 0.5rem 0;
-    }
-    .high-risk {
-        color: #d62728;
-        font-weight: bold;
-    }
-    .moderate-risk {
-        color: #ff7f0e;
-        font-weight: bold;
-    }
-    .low-risk {
-        color: #2ca02c;
-        font-weight: bold;
-    }
-</style>
-""", unsafe_allow_html=True)
+# Theme toggle in session state
+if 'theme' not in st.session_state:
+    st.session_state.theme = 'dark'
+
+# Custom CSS for dark/light mode
+def get_theme_css(theme):
+    if theme == 'dark':
+        return """
+        <style>
+            /* Dark mode styles */
+            [data-testid="stAppViewContainer"] {
+                background-color: #0e1117;
+                color: #fafafa;
+            }
+            [data-testid="stSidebar"] {
+                background-color: #262730;
+            }
+            [data-testid="stHeader"] {
+                background-color: #0e1117;
+            }
+            .main-header {
+                font-size: 2.5rem;
+                font-weight: 700;
+                color: #58a6ff;
+                text-align: center;
+                margin-bottom: 1rem;
+            }
+            .metric-card {
+                background-color: #1c1e26;
+                padding: 1rem;
+                border-radius: 0.5rem;
+                margin: 0.5rem 0;
+                border: 1px solid #30363d;
+            }
+            .high-risk {
+                color: #ff6b6b;
+                font-weight: bold;
+            }
+            .moderate-risk {
+                color: #ffa500;
+                font-weight: bold;
+            }
+            .low-risk {
+                color: #51cf66;
+                font-weight: bold;
+            }
+            div[data-testid="stMetricValue"] {
+                color: #fafafa;
+            }
+            .stDataFrame {
+                background-color: #1c1e26;
+            }
+        </style>
+        """
+    else:
+        return """
+        <style>
+            /* Light mode styles */
+            [data-testid="stAppViewContainer"] {
+                background-color: #ffffff;
+                color: #262730;
+            }
+            [data-testid="stSidebar"] {
+                background-color: #f0f2f6;
+            }
+            [data-testid="stHeader"] {
+                background-color: #ffffff;
+            }
+            .main-header {
+                font-size: 2.5rem;
+                font-weight: 700;
+                color: #1f77b4;
+                text-align: center;
+                margin-bottom: 1rem;
+            }
+            .metric-card {
+                background-color: #f0f2f6;
+                padding: 1rem;
+                border-radius: 0.5rem;
+                margin: 0.5rem 0;
+                border: 1px solid #e0e0e0;
+            }
+            .high-risk {
+                color: #d62728;
+                font-weight: bold;
+            }
+            .moderate-risk {
+                color: #ff7f0e;
+                font-weight: bold;
+            }
+            .low-risk {
+                color: #2ca02c;
+                font-weight: bold;
+            }
+        </style>
+        """
+
+st.markdown(get_theme_css(st.session_state.theme), unsafe_allow_html=True)
+
+# Helper function for plotly theme
+def get_plotly_template():
+    """Get plotly template based on current theme"""
+    return "plotly_dark" if st.session_state.theme == 'dark' else "plotly_white"
 
 # Load data
 @st.cache_data
@@ -98,6 +171,16 @@ except Exception as e:
 # Sidebar
 st.sidebar.markdown("# 📊 DebtSage")
 st.sidebar.markdown("### AI-Powered Debt Crisis Analysis")
+st.sidebar.markdown("---")
+
+# Theme toggle button
+theme_icon = "☀️" if st.session_state.theme == 'dark' else "🌙"
+theme_label = "Light Mode" if st.session_state.theme == 'dark' else "Dark Mode"
+
+if st.sidebar.button(f"{theme_icon} {theme_label}", use_container_width=True):
+    st.session_state.theme = 'light' if st.session_state.theme == 'dark' else 'dark'
+    st.rerun()
+
 st.sidebar.markdown("---")
 
 page = st.sidebar.radio(
@@ -168,7 +251,7 @@ if page == "🏠 Overview":
                 x=test_perf['Model'],
                 y=test_perf[metric],
             ))
-        fig.update_layout(
+        fig.update_layout(template=get_plotly_template(), 
             title="Model Performance Comparison (Test Set)",
             barmode='group',
             height=400
@@ -183,7 +266,7 @@ if page == "🏠 Overview":
             orientation='h',
             marker_color='steelblue'
         ))
-        fig.update_layout(
+        fig.update_layout(template=get_plotly_template(), 
             title="Top 10 Risk Predictors",
             xaxis_title="Importance",
             yaxis={'categoryorder': 'total ascending'},
@@ -292,7 +375,7 @@ elif page == "🌍 Country Analysis":
         fig.update_xaxes(title_text="Year")
         fig.update_yaxes(title_text="Debt-to-GDP (%)", secondary_y=False)
         fig.update_yaxes(title_text="Deficit-to-GDP (%)", secondary_y=True)
-        fig.update_layout(height=500, hovermode='x unified')
+        fig.update_layout(template=get_plotly_template(), height=500, hovermode='x unified')
         
         st.plotly_chart(fig, width='stretch')
     
@@ -309,7 +392,7 @@ elif page == "🌍 Country Analysis":
             name="Expenditure", fill='tozeroy', line=dict(color='red')
         ))
         
-        fig.update_layout(
+        fig.update_layout(template=get_plotly_template(), 
             title="Revenue vs Expenditure (% of GDP)",
             xaxis_title="Year",
             yaxis_title="% of GDP",
@@ -332,7 +415,7 @@ elif page == "🌍 Country Analysis":
             fig.add_hline(y=50, line_dash="dash", line_color="red", 
                          annotation_text="High Risk Threshold")
             
-            fig.update_layout(
+            fig.update_layout(template=get_plotly_template(), 
                 title="ML Risk Score Evolution",
                 xaxis_title="Year",
                 yaxis_title="Risk Score (%)",
@@ -441,7 +524,7 @@ elif page == "🤖 ML Risk Predictor":
                 orientation='h',
                 marker_color='coral'
             ))
-            fig.update_layout(
+            fig.update_layout(template=get_plotly_template(), 
                 xaxis_title="Contribution to Risk Score",
                 height=300
             )
@@ -500,7 +583,7 @@ elif page == "📈 Debt Projections":
         fig.add_hline(y=60, line_dash="dash", line_color="orange", 
                      annotation_text="Moderate Risk (60%)")
         
-        fig.update_layout(
+        fig.update_layout(template=get_plotly_template(), 
             title=f"{selected_country} - Debt-to-GDP Projections",
             xaxis_title="Years Ahead",
             yaxis_title="Debt-to-GDP (%)",
@@ -569,7 +652,8 @@ elif page == "📊 Cross-Country Comparison":
         labels={'risk_score': 'Risk Score (%)', 'country': 'Country'},
         color='risk_score',
         color_continuous_scale='RdYlGn_r',
-        height=500
+        height=500,
+        template=get_plotly_template()
     )
     
     fig_bar.add_vline(x=30, line_dash="dash", line_color="orange", 
@@ -611,7 +695,8 @@ elif page == "📊 Cross-Country Comparison":
         },
         color_continuous_scale='RdYlGn_r',
         height=600,
-        size_max=30
+        size_max=30,
+        template=get_plotly_template()
     )
     
     # Add reference lines
@@ -622,7 +707,7 @@ elif page == "📊 Cross-Country Comparison":
     fig.add_hline(y=0, line_dash="solid", line_color="gray", line_width=1)
     
     fig.update_traces(textposition='middle center', textfont_size=9)
-    fig.update_layout(showlegend=True)
+    fig.update_layout(template=get_plotly_template(), showlegend=True)
     st.plotly_chart(fig, width='stretch')
 
 # Footer
