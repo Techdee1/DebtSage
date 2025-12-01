@@ -551,17 +551,49 @@ elif page == "📊 Cross-Country Comparison":
         hide_index=True
     )
     
-    # Scatter plot: Debt vs Risk
+    # Bar chart: Risk Scores by Country
+    st.markdown("---")
+    st.subheader("ML Risk Scores by Country")
+    
+    # Use the latest year data from risk_data
+    latest_year = risk_data['year'].max()
+    latest_risk_scores = risk_data[risk_data['year'] == latest_year].copy()
+    latest_risk_scores = latest_risk_scores.sort_values('risk_score', ascending=True)
+    
+    fig_bar = px.bar(
+        latest_risk_scores,
+        x='risk_score',
+        y='country',
+        orientation='h',
+        title=f'Debt Crisis Risk Scores - {int(latest_year)}',
+        labels={'risk_score': 'Risk Score (%)', 'country': 'Country'},
+        color='risk_score',
+        color_continuous_scale='RdYlGn_r',
+        height=500
+    )
+    
+    fig_bar.add_vline(x=30, line_dash="dash", line_color="orange", 
+                     annotation_text="Moderate Risk", annotation_position="top right")
+    fig_bar.add_vline(x=50, line_dash="dash", line_color="red", 
+                     annotation_text="High Risk", annotation_position="top right")
+    
+    fig_bar.update_traces(textposition='outside')
+    fig_bar.update_layout(showlegend=False)
+    st.plotly_chart(fig_bar, width='stretch')
+    
+    # Scatter plot: Debt vs Deficit
     st.markdown("---")
     st.subheader("Debt Sustainability Matrix")
     
-    latest_year = fiscal_data['year'].max()
-    # Get fiscal data for latest year
+    # Get fiscal data for latest year (use the same year as risk data)
     latest_fiscal = fiscal_data[fiscal_data['year'] == latest_year][['country', 'debt_to_gdp', 'deficit_to_gdp']].copy()
-    # Get risk scores for latest year
-    latest_risk = risk_data[risk_data['year'] == latest_year][['country', 'risk_score']].copy()
     # Merge without duplicate columns
-    latest_data = latest_fiscal.merge(latest_risk, on='country', how='left')
+    latest_data = latest_fiscal.merge(latest_risk_scores[['country', 'risk_score']], on='country', how='inner')
+    
+    # Remove rows with missing values for cleaner visualization
+    latest_data = latest_data.dropna(subset=['debt_to_gdp', 'deficit_to_gdp', 'risk_score'])
+    
+    st.info(f"Showing {len(latest_data)} countries with complete data for {int(latest_year)}")
     
     fig = px.scatter(
         latest_data,
@@ -569,22 +601,28 @@ elif page == "📊 Cross-Country Comparison":
         y='deficit_to_gdp',
         size='risk_score',
         color='risk_score',
+        hover_name='country',
         text='country',
-        title='Debt Sustainability Matrix',
+        title=f'Debt vs Deficit Analysis - {int(latest_year)}',
         labels={
             'debt_to_gdp': 'Debt-to-GDP (%)',
             'deficit_to_gdp': 'Budget Balance (% of GDP)',
-            'risk_score': 'ML Risk Score'
+            'risk_score': 'ML Risk Score (%)'
         },
         color_continuous_scale='RdYlGn_r',
-        height=600
+        height=600,
+        size_max=30
     )
     
-    fig.add_vline(x=70, line_dash="dash", line_color="red")
-    fig.add_hline(y=-5, line_dash="dash", line_color="red")
-    fig.add_hline(y=0, line_dash="solid", line_color="black")
+    # Add reference lines
+    fig.add_vline(x=70, line_dash="dash", line_color="red", 
+                 annotation_text="High Debt (70%)", annotation_position="top right")
+    fig.add_hline(y=-5, line_dash="dash", line_color="red",
+                 annotation_text="High Deficit (-5%)", annotation_position="bottom right")
+    fig.add_hline(y=0, line_dash="solid", line_color="gray", line_width=1)
     
-    fig.update_traces(textposition='top center')
+    fig.update_traces(textposition='middle center', textfont_size=9)
+    fig.update_layout(showlegend=True)
     st.plotly_chart(fig, width='stretch')
 
 # Footer
