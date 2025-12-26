@@ -1,6 +1,5 @@
 """
 DebtSage - African Sovereign Debt Crisis Analysis Dashboard
-10Alytics Global Hackathon 2025
 """
 
 import streamlit as st
@@ -733,7 +732,7 @@ elif page == "📊 Cross-Country Comparison":
 st.markdown("---")
 st.markdown("""
 <div style='text-align: center; color: #666;'>
-    <p><strong>DebtSage</strong> - AI-Powered Sovereign Debt Analysis | 10Alytics Global Hackathon 2025</p>
+    <p><strong>DebtSage</strong> - AI-Powered Sovereign Debt Analysis</p>
     <p>Built with ❤️ using Python, Streamlit, scikit-learn, and XGBoost</p>
 </div>
 """, unsafe_allow_html=True)
