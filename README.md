@@ -1,7 +1,5 @@
 # DebtSage - AI-Powered African Sovereign Debt Crisis Analysis
 
-## 🏆 10Alytics Global Hackathon 2025 Submission
-
 ### Project Overview
 
 **DebtSage** is an advanced analytical platform that leverages machine learning to predict sovereign debt crises and provide actionable policy recommendations for African countries. Using 60+ years of fiscal data across 14 countries, our system achieves 93.4% accuracy in identifying debt distress situations.
@@ -59,8 +57,8 @@
 
 ```bash
 # Clone repository
-git clone https://github.com/Techdee1/10Analytics.git
-cd 10Analytics
+git clone https://github.com/Techdee1/DebtSage.git
+cd DebtSage
 
 # Create virtual environment
 python -m venv .venv
@@ -85,7 +83,7 @@ Navigate to `http://localhost:8501` in your browser.
 ## 📁 Project Structure
 
 ```
-10Analytics/
+DebtSage/
 ├── data/                          # Datasets
 │   ├── cleaned_panel_data.csv     # 623 country-year observations
 │   ├── ml_features_complete.csv   # 41 ML features
@@ -180,11 +178,6 @@ Debt(t+1) = Debt(t) × (1 + interest_rate - gdp_growth) + Primary_Deficit(t)
 
 ---
 
-## 🎓 Team & Attribution
-
-**10Alytics Global Hackathon 2025**  
-Analyzing African Sovereign Debt Crisis: Pathways to Sustainable Recovery
-
 ### Data Sources
 - World Bank Open Data
 - IMF Fiscal Monitor
@@ -194,7 +187,7 @@ Analyzing African Sovereign Debt Crisis: Pathways to Sustainable Recovery
 
 ## 📝 License
 
-This project is developed for educational and research purposes as part of the 10Alytics Global Hackathon 2025.
+This project is developed for educational and research purposes.
 
 ---
 
@@ -202,14 +195,13 @@ This project is developed for educational and research purposes as part of the 1
 
 For questions or collaboration:
 - GitHub: [@Techdee1](https://github.com/Techdee1)
-- Project Repository: [10Analytics](https://github.com/Techdee1/10Analytics)
+- Project Repository: [DebtSage](https://github.com/Techdee1/DebtSage)
 
 ---
 
 ## 🙏 Acknowledgments
 
 Special thanks to:
-- 10Alytics for organizing the Global Hackathon 2025
 - Data providers (World Bank, IMF, AfDB)
 - Open-source community (scikit-learn, XGBoost, Plotly, Streamlit)
 
